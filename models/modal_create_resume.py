@@ -1,18 +1,18 @@
+import dataclasses
+import json
 import discord
-from dataclasses import dataclass
+import os
+from dataclasses import dataclass, field
+from .user import User
 
 
 @dataclass(init=False)
 class ModalCreateResume(discord.ui.Modal):
-    lastname: str
-    firstname: str
-    portfolio: str
-    github: str
-    description: str
-    # skills: Skill = field(default=None)
-    # project: Project = field(default=None)
-    # developer_experience: DeveloperExperience = field(default=None)
-    # education: Education = field(default=None)
+    lastname: str = field(default=None)
+    firstname: str = field(default=None)
+    portfolio: str = field(default=None)
+    github: str = field(default=None)
+    description: str = field(default=None)
 
     def __init__(self, *, title: str = "Create your resume") -> None:
         super().__init__(title=title)
@@ -24,6 +24,29 @@ class ModalCreateResume(discord.ui.Modal):
         self.add_item(discord.ui.InputText(label="A little description", style=discord.InputTextStyle.long))
 
     async def callback(self, interaction: discord.Interaction):
-        print(f"{interaction.user.id} + {self.children[0].value} + {self.children[1].value} + {self.children[2].value}")
-        print(f"{self.children[3].value} + {self.children[4].value}")
-        await interaction.response.send_message("Fini")
+        path = f"./json/{interaction.user.id}.json"
+        file = open(f"./json/{interaction.user.id}.json", "r")
+
+        if (os.path.getsize(f"./json/{interaction.user.id}.json")) != 0:
+            file.close()
+            file = open(path, "r")
+            user_data = json.load(file)
+            print(user_data)
+            user = User(**user_data)
+            setattr(user, 'lastname', f"{self.children[0].value}")
+            setattr(user, 'firstname', f"{self.children[1].value}")
+            setattr(user, 'portfolio', f"{self.children[2].value}")
+            setattr(user, 'github', f"{self.children[3].value}")
+            setattr(user, 'description', f"{self.children[4].value}")
+            file.close()
+            file = open(path, "w")
+            json.dump(dataclasses.asdict(user), file, indent=11)
+            file.close()
+
+        else:
+            user = User(interaction.user.id, f"{self.children[0].value}", f"{self.children[1].value}", f"{self.children[2].value}", f"{self.children[3].value}", f"{self.children[4].value}")
+            json_string = json.dumps(dataclasses.asdict(user), indent=11)
+            file.write(json_string)
+            file.close()
+
+        await interaction.response.send_message(dataclasses.asdict(user))

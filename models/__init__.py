@@ -3,3 +3,8 @@ from .education import Education
 from .skill import Skill
 from .developer_experience import DeveloperExperience
 from .modal_create_resume import ModalCreateResume
+from .modal_add_project import ModalAddProject
+from .modal_add_education import ModalAddEducation
+from .modal_add_skill import ModalAddSkill
+from .modal_add_developer_experience import ModalAddDeveloperExperience
+from .user import User

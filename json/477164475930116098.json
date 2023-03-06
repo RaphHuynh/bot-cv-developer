@@ -1,0 +1,32 @@
+{
+           "id_user": 477164475930116098,
+           "lastname": "Huynh",
+           "firstname": "Rapha\u00eblle",
+           "portfolio": "https://raphhuynh.github.io/react-portefolio/",
+           "github": "https://github.com/RaphHuynh",
+           "description": "Je suis \u00e9tudiante en 2 eme ann\u00e9e de Licence informatique.\nActuellement, je suis entrain d'apprendre le Python et le JAVA (cot\u00e9 serveur)",
+           "education": {
+                      "degree": "Licence informatique",
+                      "institution": "URCA",
+                      "date": "2019-20XX"
+           },
+           "skill": {
+                      "language": "Python, C, Java, PHP, HTML, CSS , JavaScript, SQL",
+                      "framework": "Laravel, ReactJS, VueJs, Tailwind CSS",
+                      "tools": "GIT, VSCODE, JETBRAINS, Jupyter",
+                      "system": "MACOS, Linux"
+           },
+           "project": {
+                      "title": "bot cv developer",
+                      "description": "C'est un bot discord pour enregistrer son cv sur discord afin de facilit\u00e9 l'\u00e9change de celui-ci.",
+                      "date": "2023",
+                      "skill": "Python, API, JSON, NoSQL"
+           },
+           "developerExperience": {
+                      "job": "Stage d\u00e9veloppement Back-end Symfony",
+                      "date": "mai 2021 - juillet 2021",
+                      "employer": "LeBidibul ",
+                      "description": "Le stage consistait dans un premier temps \u00e0 r\u00e9aliser une \u00e9tude des diff\u00e9rents cms prestashop, wordpress... puis \u00e0 r\u00e9aliser un site de click&collect. Pour cela, j'ai dans un premier temps mod\u00e9lis\u00e9 la base de donn\u00e9es avec la m\u00e9thode merise. Ensuite, j'ai r\u00e9alis\u00e9 le site avec le Framework Symfony.",
+                      "skill": "Php Symfony Tailwind CSS"
+           }
+}

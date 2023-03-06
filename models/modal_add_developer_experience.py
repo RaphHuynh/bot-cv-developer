@@ -1,14 +1,15 @@
+import dataclasses
+
 import discord
+import os
+import json
 from dataclasses import dataclass
+from .user import User
+from .developer_experience import DeveloperExperience
 
 
 @dataclass(init=False)
 class ModalAddDeveloperExperience(discord.ui.Modal):
-    job: str
-    date: str
-    employer: str
-    description: str
-    skill: str
 
     def __init__(self, *, title: str = "Add your job") -> None:
         super().__init__(title=title)
@@ -21,5 +22,21 @@ class ModalAddDeveloperExperience(discord.ui.Modal):
 
     async def callback(self, interaction: discord.Interaction):
         print(f"{interaction.user.id} + {self.children[0].value} + {self.children[1].value} + {self.children[2].value} + {self.children[3].value} + {self.children[4].value}")
+        path = f"./json/{interaction.user.id}.json"
+        file = open(path, "r")
+
+        if (os.path.getsize(path)) != 0:
+            user_data = json.load(file)
+            user = User(**user_data)
+            setattr(user, 'developerExperience', DeveloperExperience(self.children[0].value, self.children[1].value, self.children[2].value, self.children[3].value, self.children[4].value))
+            file.close()
+            file = open(path, "w")
+            json.dump(dataclasses.asdict(user), file, indent=11)
+            file.close()
+        else:
+            user = User(id_user=interaction.user.id, developerExperience=DeveloperExperience(self.children[0].value, self.children[1].value, self.children[2].value, self.children[3].value, self.children[4].value))
+            json_string = json.dumps(dataclasses.asdict(user), indent=11)
+            file.write(json_string)
+            file.close()
 
         await interaction.response.send_message("Finish")
