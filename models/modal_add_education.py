@@ -23,7 +23,10 @@ class ModalAddEducation(discord.ui.Modal):
 
     async def callback(self, interaction: discord.Interaction):
         path = f"./json/{interaction.user.id}.json"
-        file = open(f"./json/{interaction.user.id}.json", "r")
+        try:
+            file = open(path, "r")
+        except FileNotFoundError:
+            file = open(path, "w")
 
         if (os.path.getsize(path)) != 0:
             user_data = json.load(file)

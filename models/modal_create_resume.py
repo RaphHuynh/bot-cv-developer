@@ -8,11 +8,6 @@ from .user import User
 
 @dataclass(init=False)
 class ModalCreateResume(discord.ui.Modal):
-    lastname: str = field(default=None)
-    firstname: str = field(default=None)
-    portfolio: str = field(default=None)
-    github: str = field(default=None)
-    description: str = field(default=None)
 
     def __init__(self, *, title: str = "Create your resume") -> None:
         super().__init__(title=title)
@@ -25,9 +20,12 @@ class ModalCreateResume(discord.ui.Modal):
 
     async def callback(self, interaction: discord.Interaction):
         path = f"./json/{interaction.user.id}.json"
-        file = open(f"./json/{interaction.user.id}.json", "r")
+        try:
+            file = open(path, "r")
+        except FileNotFoundError:
+            file = open(path, "w")
 
-        if (os.path.getsize(f"./json/{interaction.user.id}.json")) != 0:
+        if (os.path.getsize(path)) != 0:
             file.close()
             file = open(path, "r")
             user_data = json.load(file)
@@ -49,4 +47,4 @@ class ModalCreateResume(discord.ui.Modal):
             file.write(json_string)
             file.close()
 
-        await interaction.response.send_message(dataclasses.asdict(user))
+        await interaction.response.send_message("The form it's validate")
