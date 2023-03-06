@@ -90,25 +90,25 @@ async def view_cv(ctx, member: discord.Member):
         file = open(path, "r")
         user_data = json.load(file)
         for k, v in user_data.items():
-            if k == 'education' and user_data['education']['degree'] != "null":
+            if k == 'education' and user_data['education'] is not None:
                 for key, val in user_data['education'].items():
                     if key != 'date':
                         embed.add_field(name=f"{key}", value=f"{val}")
                     else:
                         embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k == 'skill' and user_data['skill']['language'] != "null":
+            elif k == 'skill' and user_data['skill'] is not None:
                 for key, val in user_data['skill'].items():
                     if key != 'system':
                         embed.add_field(name=f"{key}", value=f"{val}")
                     else:
                         embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k == 'project' and user_data['project']['title'] != "null":
+            elif k == 'project' and user_data['project'] is not None:
                 for key, val in user_data['project'].items():
                     if key != 'skill':
                         embed.add_field(name=f"{key}", value=f"{val}")
                     else:
                         embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k == 'developerExperience' and user_data['developerExperience']['job'] != "null":
+            elif k == 'developerExperience' and user_data['developerExperience'] is not None:
                 for key, val in user_data['developerExperience'].items():
                     if key != 'skill':
                         embed.add_field(name=f"{key}", value=f"{val}")
