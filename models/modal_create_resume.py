@@ -2,7 +2,7 @@ import dataclasses
 import json
 import discord
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from .user import User
 
 

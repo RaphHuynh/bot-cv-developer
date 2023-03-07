@@ -5,8 +5,12 @@ import models.modal_add_skill as mas
 import models.modal_add_education as mae
 import models.modal_add_developer_experience as made
 import models.modal_add_project as map
+from commands.embed_resume import embed_resume
+from commands.embed_skill import embed_skill
+from commands.embed_dev_exp import embed_dev_exp
+from commands.embed_project import embed_project
+from commands.embed_education import embed_education
 from config import *
-from project.models import User
 
 
 bot = discord.Bot(debug_guilds=[827506827616714782])
@@ -89,40 +93,17 @@ async def view_cv(ctx, member: discord.Member):
         path = f"./json/{member.id}.json"
         file = open(path, "r")
         user_data = json.load(file)
-        for k, v in user_data.items():
-            if k == 'education' and user_data['education'] is not None:
-                for key, val in user_data['education'].items():
-                    if key != 'date':
-                        embed.add_field(name=f"{key}", value=f"{val}")
-                    else:
-                        embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k == 'skill' and user_data['skill'] is not None:
-                for key, val in user_data['skill'].items():
-                    if key != 'system':
-                        embed.add_field(name=f"{key}", value=f"{val}")
-                    else:
-                        embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k == 'project' and user_data['project'] is not None:
-                for key, val in user_data['project'].items():
-                    if key != 'skill':
-                        embed.add_field(name=f"{key}", value=f"{val}")
-                    else:
-                        embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k == 'developerExperience' and user_data['developerExperience'] is not None:
-                for key, val in user_data['developerExperience'].items():
-                    if key != 'skill':
-                        embed.add_field(name=f"{key}", value=f"{val}")
-                    else:
-                        embed.add_field(name=f"{key}", value=f"{val}", inline=False)
-            elif k != 'id_user':
-                if k != 'description':
-                    embed.add_field(name=f"{k}", value=f"{v}")
-                else:
-                    embed.add_field(name=f"{k}", value=f"{v}", inline=False)
-        embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/3135/3135692.png")
-        embed.set_footer(text="By RaynhCoding")
+        embed_r = embed_resume(user_data)
+        embed_d_e = embed_dev_exp(user_data)
+        embed_p = embed_project(user_data)
+        embed_s = embed_skill(user_data)
+        embed_e = embed_education(user_data)
         file.close()
-        await ctx.respond(embed=embed)
+        await ctx.respond(embed=embed_r)
+        await ctx.respond(embed=embed_d_e)
+        await ctx.respond(embed=embed_p)
+        await ctx.respond(embed=embed_s)
+        await ctx.respond(embed=embed_e)
     except FileNotFoundError:
         await ctx.respond("This people doesn't have a resume.")
 

@@ -10,7 +10,6 @@ from .user import User
 
 @dataclass(init=False)
 class ModalAddSkill(discord.ui.Modal):
-    skills: Skill
 
     def __init__(self, *, title: str = "Add your Skills") -> None:
         super().__init__(title=title)
