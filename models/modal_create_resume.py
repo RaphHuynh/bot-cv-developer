@@ -16,7 +16,7 @@ class ModalCreateResume(discord.ui.Modal):
         self.add_item(discord.ui.InputText(label="Your firstname"))
         self.add_item(discord.ui.InputText(label="Link of your portfolio"))
         self.add_item(discord.ui.InputText(label="Link of your github"))
-        self.add_item(discord.ui.InputText(label="A little description", style=discord.InputTextStyle.long))
+        self.add_item(discord.ui.InputText(label="A little description"))
 
     async def callback(self, interaction: discord.Interaction):
         path = f"./json/{interaction.user.id}.json"

@@ -2,11 +2,20 @@
            "id_user": 557680932463706213,
            "lastname": "MERLE",
            "firstname": "Jascha",
-           "portfolio": "None, yet",
+           "portfolio": "NONE",
            "github": "https://github.com/Jasch-M",
-           "description": "My name is Jascha (Th\u00e9ophile) DOLINSKY MERLE. I'm a passionate computer scientist who loves to create tools and things to help out communities and the world in general. They call me the chief Swift officer or the chief .NET (doesn't matter the specific language implementation) officer around town. Those are the languages I tend to nerd out the most on and do a majority of my projects in. I'm also a JVM language enthusiast and someone who prefers statically typed languages in general. I am one of the rare C++ enjoyers on this planet and I also have quite a bit of experience and technical knowhow in Python and Ruby code and my frontend frameworks of choice are Vue and Svelte. I also enjoy reasonably Go and Rust programming. I very occasionally do some C code. I know some JS/TS and PHP but they aren't necessarily my favorites. I also know other more obscure languages including quite a number of esoteric ones and modern ones like nim, julia, zig and dart. I favor modern programming languages and approaches like Kotlin, Dart and the upcoming Carbon which is my most anticipated one. I daily drive most of the JetBrains IDEs. I am a chess enjoyer and a pretty strong competitive super smash brothers player. I like games, I like traveling and food and meeting people the world over. I have a pretty positive outlook on life and making it better for everyone on this blue planet is my life's mission.",
-           "education": null,
-           "skill": null,
+           "description": "My name is Jascha (Th\u00e9ophile) DOLINSKY MERLE and I'm a 20 year old passionate computer scientist who loves to be a big help to any community. They jokingly call me the chief Swift officer or the chief .NET officer around town. Those are the languages I tend to nerd out the most on and do a majority of my projects in. I'm also a JVM language, Python, Ruby, Rust and Go and modern syntax in general enthusiast and one of the rare C++ enjoyers on this planet and my frameworks of choice are Vue and Svelte. Carbon is my most anticipated language. I very occasionally do some C code as well as some JS/TS and PHP. I also know other more obscure languages including quite a number of esoteric ones and niche ones. I daily drive IntelliJ-based IDEs. I am a chess enjoyer and a pretty strong competitive super smash brothers player. I like games, I like traveling and food and meeting people the world over. I have a pretty positive outlook on life and making it better for everyone on this blue planet is my life's mission.",
+           "education": {
+                      "degree": "Brevet des coll\u00e8ges",
+                      "institution": "Coll\u00e8ge Jean Baptiste Poquelin",
+                      "date": "2017"
+           },
+           "skill": {
+                      "language": "HTML, CSS, JavaScript, TypeScript, ActionScript, AssemblyScript, C, C++, Objective - C, Objective - C++, D, Visual C++, C#, F#, VB.NET, Dart, Java, Scala, Groovy, Kotlin, Go, Rust, Python, Ruby, Swift, PHP, SQL, Haskell, OCaml, Lisp, Erlang, Elixir, B, Chef, Whitespace, Shakespeare, INTERCAL, Brainf**k, LOLcode, emojicode ",
+                      "framework": ".NET, .NET Core, WinForms, WPF, UWP, Avalonia, ASP.NET, ASP.NET Core, Blazor, Unity, Vue.js, Svelete, React, Angular, Django, Ruby on Rails, Laravel, Flask, Vapor, Ktor, Gin, SDL, Unreal Engine, Godot",
+                      "tools": "IntelliJ IDEA, PyCharm, CLion, Rider, WebStorm, PhpStorm, DataSpell, GoLand, DataGrip, RubyMine, AppCode, Xcode, Visual Studio w/ Resharper / Resharper C++",
+                      "system": "MacOS, Windows, Linux (PopOS, Debian, Ubuntu, Arch, Nix, Manjaro, Fedora)."
+           },
            "project": null,
            "developerExperience": null
 }

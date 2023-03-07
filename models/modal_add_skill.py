@@ -15,10 +15,10 @@ class ModalAddSkill(discord.ui.Modal):
     def __init__(self, *, title: str = "Add your Skills") -> None:
         super().__init__(title=title)
 
-        self.add_item(discord.ui.InputText(label="Your programming language", style=discord.InputTextStyle.long, placeholder="Python, CSS ..."))
-        self.add_item(discord.ui.InputText(label="Your framework/cms and libraries", style=discord.InputTextStyle.long, placeholder="Django, Svelte ..."))
-        self.add_item(discord.ui.InputText(label="Your tools", style=discord.InputTextStyle.long, placeholder="Figma, Postman ..."))
-        self.add_item(discord.ui.InputText(label="Your system", style=discord.InputTextStyle.long, placeholder="MACOS, Linux, Debian ..."))
+        self.add_item(discord.ui.InputText(label="Your programming language", placeholder="Python, CSS ..."))
+        self.add_item(discord.ui.InputText(label="Your framework/cms and libraries", placeholder="Django, Svelte ..."))
+        self.add_item(discord.ui.InputText(label="Your tools", placeholder="Figma, Postman ..."))
+        self.add_item(discord.ui.InputText(label="Your system", placeholder="MACOS, Linux, Debian ..."))
 
     async def callback(self, interaction: discord.Interaction):
         path = f"./json/{interaction.user.id}.json"

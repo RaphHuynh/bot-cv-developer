@@ -6,7 +6,12 @@
            "github": "https://github.com/RaphHuynh",
            "description": "Je suis \u00e9tudiante en L2 informatique",
            "education": null,
-           "skill": null,
+           "skill": {
+                      "language": "Python, C, Java, PHP,  HTML, CSS, JavaScript",
+                      "framework": "Laravel, ReactJS, VueJS, Tailwind CSS",
+                      "tools": "GIT, VSCODE, JETBRAINS, Canvas",
+                      "system": "MACOS, Linux"
+           },
            "project": null,
            "developerExperience": null
 }

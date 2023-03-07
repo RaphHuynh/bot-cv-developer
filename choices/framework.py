@@ -1,6 +1,7 @@
 from enum import Enum
 
 
+# feature for the future if the modals allow to make a selection menu.
 class Framework(Enum):
     # FRONT END
     REACT = "React"

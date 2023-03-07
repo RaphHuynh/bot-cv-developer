@@ -14,9 +14,9 @@ class ModalAddProject(discord.ui.Modal):
         super().__init__(title=title)
 
         self.add_item(discord.ui.InputText(label="title of project"))
-        self.add_item(discord.ui.InputText(label="A description for your project", style=discord.InputTextStyle.long))
+        self.add_item(discord.ui.InputText(label="A description for your project"))
         self.add_item(discord.ui.InputText(label="The Date of project", placeholder="20XX"))
-        self.add_item(discord.ui.InputText(label="Skills", placeholder="HTML CSS REACT WORDPRESS ...", style=discord.InputTextStyle.long))
+        self.add_item(discord.ui.InputText(label="Skills", placeholder="HTML CSS REACT WORDPRESS ..."))
 
     async def callback(self, interaction: discord.Interaction):
         path = f"./json/{interaction.user.id}.json"

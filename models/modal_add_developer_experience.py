@@ -17,8 +17,8 @@ class ModalAddDeveloperExperience(discord.ui.Modal):
         self.add_item(discord.ui.InputText(label="Your job"))
         self.add_item(discord.ui.InputText(label="The date", placeholder="20XX-20XX"))
         self.add_item(discord.ui.InputText(label="The employer", placeholder="Microsoft"))
-        self.add_item(discord.ui.InputText(label="A description", style=discord.InputTextStyle.long))
-        self.add_item(discord.ui.InputText(label="The skill of your job", style=discord.InputTextStyle.long, placeholder="React, JavaScript, Nuxt.js Tailwind CSS ..."))
+        self.add_item(discord.ui.InputText(label="A description"))
+        self.add_item(discord.ui.InputText(label="The skill of your job", placeholder="React, JavaScript, Nuxt.js Tailwind CSS ..."))
 
     async def callback(self, interaction: discord.Interaction):
         path = f"./json/{interaction.user.id}.json"
