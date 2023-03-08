@@ -22,7 +22,7 @@ class ModalAddEducation(discord.ui.Modal):
         self.add_item(discord.ui.InputText(label="Date", placeholder="20XX-20XX"))
 
     async def callback(self, interaction: discord.Interaction):
-        path = f"./json/{interaction.user.id}.json"
+        path = f"./data/user/{interaction.user.id}.json"
         try:
             file = open(path, "r")
         except FileNotFoundError:

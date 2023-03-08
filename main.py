@@ -5,15 +5,18 @@ import models.modal_add_skill as mas
 import models.modal_add_education as mae
 import models.modal_add_developer_experience as made
 import models.modal_add_project as map
+import commands.selection_menu_resume as slmr
+from discord.ext.pages import Paginator, Page
 from commands.embed_resume import embed_resume
 from commands.embed_skill import embed_skill
 from commands.embed_dev_exp import embed_dev_exp
 from commands.embed_project import embed_project
 from commands.embed_education import embed_education
+from commands.generate_pdf import generate_pdf
 from config import *
 
 
-bot = discord.Bot(debug_guilds=[827506827616714782])
+bot = discord.Bot(debug_guilds=[827506827616714782,1040767558573371392])
 
 
 @bot.event
@@ -81,31 +84,65 @@ async def add_project(ctx):
 
 
 @bot.slash_command(
-    name="view-cv",
-    description="View someone's resume."
+    name="view-cv-paginator",
+    description="View someone's resume with a system of paginator."
 )
-async def view_cv(ctx, member: discord.Member):
+async def view_cv_paginator(ctx, member: discord.Member):
     try:
-        embed = discord.Embed(
-            title="My Resume",
-            color=discord.Colour.random()
-        )
-        path = f"./json/{member.id}.json"
+        path = f"./data/user/{member.id}.json"
         file = open(path, "r")
         user_data = json.load(file)
-        embed_r = embed_resume(user_data)
-        embed_d_e = embed_dev_exp(user_data)
-        embed_p = embed_project(user_data)
-        embed_s = embed_skill(user_data)
-        embed_e = embed_education(user_data)
+        pages = [
+            Page(embeds=[embed_resume(user_data)]),
+            Page(embeds=[embed_skill(user_data)]),
+            Page(embeds=[embed_dev_exp(user_data)]),
+            Page(embeds=[embed_project(user_data)]),
+            Page(embeds=[embed_education(user_data)])
+        ]
+        paginator = Paginator(pages=pages, author_check=True)
         file.close()
-        await ctx.respond(embed=embed_r)
-        await ctx.respond(embed=embed_d_e)
-        await ctx.respond(embed=embed_p)
-        await ctx.respond(embed=embed_s)
-        await ctx.respond(embed=embed_e)
+
+        await paginator.respond(ctx.interaction)
+
     except FileNotFoundError:
         await ctx.respond("This people doesn't have a resume.")
 
+
+@bot.slash_command(
+    name="view-cv-menu",
+    descrption="View someone's resume with a system of menu."
+)
+async def view_cv_menu(ctx, member: discord.Member):
+    try:
+        path = f"./data/user/{member.id}.json"
+        file = open(path, "r")
+        user_data = json.load(file)
+        embed = embed_resume(user_data)
+        view = discord.ui.View(timeout=120)
+        view.add_item(slmr.SelectionMenuResume(user_data))
+
+        await ctx.respond(embed=embed, view=view, ephemeral=True)
+
+    except FileNotFoundError:
+        await ctx.respond("This people doesn't have a resume.")
+
+
+@bot.slash_command(
+    name="generate-resume",
+    description="generate a resume PDF"
+)
+async def generate_command(ctx, member: discord.Member):
+    try:
+        path = f"./data/user/{member.id}.json"
+        file = open(path, "r")
+        user_data = json.load(file)
+        icon = member.avatar
+        if user_data['lastname'] and user_data['skill'] and user_data['project'] and user_data['education'] and user_data['developerExperience']:
+            generate_pdf(user_data)
+            await ctx.respond("PDF generate")
+        else:
+            await ctx.respond("The person did not complete their resume in full.")
+    except FileNotFoundError:
+        await ctx.respond("This people doesn't have a resume.")
 
 bot.run(TOKEN)

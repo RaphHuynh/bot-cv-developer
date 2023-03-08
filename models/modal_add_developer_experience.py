@@ -21,7 +21,7 @@ class ModalAddDeveloperExperience(discord.ui.Modal):
         self.add_item(discord.ui.InputText(label="The skill of your job", placeholder="React, JavaScript, Nuxt.js Tailwind CSS ..."))
 
     async def callback(self, interaction: discord.Interaction):
-        path = f"./json/{interaction.user.id}.json"
+        path = f"./data/user/{interaction.user.id}.json"
         try:
             file = open(path, "r")
         except FileNotFoundError:

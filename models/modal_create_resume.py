@@ -19,7 +19,7 @@ class ModalCreateResume(discord.ui.Modal):
         self.add_item(discord.ui.InputText(label="A little description"))
 
     async def callback(self, interaction: discord.Interaction):
-        path = f"./json/{interaction.user.id}.json"
+        path = f"./data/user/{interaction.user.id}.json"
         try:
             file = open(path, "r")
         except FileNotFoundError:
