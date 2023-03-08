@@ -42,4 +42,4 @@ class ModalAddEducation(discord.ui.Modal):
             file.write(json_string)
             file.close()
 
-        await interaction.response.send_message("Finish")
+        await interaction.response.send_message("The form it's validate")

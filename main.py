@@ -25,7 +25,7 @@ async def on_ready():
 
 
 @bot.slash_command(
-    name="command",
+    name="help",
     description="list of commands"
 )
 async def command(ctx):
@@ -35,8 +35,12 @@ async def command(ctx):
         color=discord.Colour.random()
     )
     embed.add_field(name="/register", value="Create a new resume.", inline=False)
-    embed.add_field(name="/edit", value="Edit your own resume.", inline=False)
-    embed.add_field(name="/view-cv", value="View someone's resume.", inline=False)
+    embed.add_field(name="/add-skills", value="Add skill on your resume.", inline=False)
+    embed.add_field(name="/add-education", value="Set a degree or piece of academic success to highlight.", inline=False)
+    embed.add_field(name="/add-project", value="Set a project to highlight.", inline=False)
+    embed.add_field(name="/add-developer-experience", value="Set a developer experience to highlight.", inline=False)
+    embed.add_field(name="/view-cv-paginator", value="View someone's resume with system of pagination.", inline=False)
+    embed.add_field(name="/view-cv-menu", value="View someone's resume with a menu selection.", inline=False)
     embed.add_field(name="/generate-cv", value="Generate someone's resume as a PDF.", inline=False)
     embed.set_footer(text="By RaynhCoding")
 
@@ -61,7 +65,7 @@ async def add_skill(ctx):
 
 @bot.slash_command(
     name="add-education",
-    descrption="Add your degree"
+    descrption="Set a degree or piece of academic success to highlight"
 )
 async def add_education(ctx):
     await ctx.send_modal(mae.ModalAddEducation())
@@ -69,7 +73,7 @@ async def add_education(ctx):
 
 @bot.slash_command(
     name="add-developer-experience",
-    description="Add your a experience"
+    description="Set a developer experience to highlight"
 )
 async def add_developer_experience(ctx):
     await ctx.send_modal(made.ModalAddDeveloperExperience())
@@ -77,7 +81,7 @@ async def add_developer_experience(ctx):
 
 @bot.slash_command(
     name="add-project",
-    description="Add your a project"
+    description="Set a project to highlight"
 )
 async def add_project(ctx):
     await ctx.send_modal(map.ModalAddProject())
@@ -136,11 +140,14 @@ async def generate_command(ctx, member: discord.Member):
         path = f"./data/user/{member.id}.json"
         file = open(path, "r")
         user_data = json.load(file)
-        icon = member.avatar
-        if user_data['lastname'] and user_data['skill'] and user_data['project'] and user_data['education'] and user_data['developerExperience']:
-            generate_pdf(user_data)
-            await ctx.respond("PDF generate")
+        if user_data['lastname'] and user_data['skill'] and user_data['project'] and user_data['education'] and \
+                user_data['developerExperience']:
+            file_pdf = generate_pdf(user_data)
+            file.close()
+            await ctx.respond('The PDF has been generated', file=discord.File(file_pdf))
+            file_pdf.close()
         else:
+            file.close()
             await ctx.respond("The person did not complete their resume in full.")
     except FileNotFoundError:
         await ctx.respond("This people doesn't have a resume.")

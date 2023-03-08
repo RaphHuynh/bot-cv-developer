@@ -97,4 +97,7 @@ def generate_pdf(data_user):
     pdf.cell(20, 10, f"{data_user['education']['institution']} : {data_user['education']['date']}",
              ln=1)
 
-    pdf.output('tuto.pdf', 'F')
+    pdf.output('./data/cv/cv.pdf', 'F')
+    file = open('./data/cv/cv.pdf', 'rb')
+    return file
+
